@@ -1,0 +1,25 @@
+{
+  "name": "chigon-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^12.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "@types/react": "^18.0.15",
+    "typescript": "^4.7.4"
+  }
+}
