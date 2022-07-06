@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next export",
-    "deploy": "next build && next export && touch out/.nojekyll && git add out/ && git commit -m 'deploy' && git subtree push --prefix out origin gh-pages"
+    "deploy": "next build && next export && touch out/.nojekyll && git add -f out/ && git checkout -b temp-for-deploy-gh-pages && git commit -m 'deploy' && git subtree split --prefix out -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages && git checkout main && git branch -D temp-for-deploy-gh-pages"
   },
   "author": "",
   "license": "ISC",
