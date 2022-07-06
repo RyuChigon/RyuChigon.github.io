@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export",
+    "deploy": "next build && next export && touch out/.nojekyll && git add out/ && git commit -m 'deploy' && git subtree push --prefix out origin gh-pages"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +22,10 @@
   "devDependencies": {
     "@types/node": "^18.0.3",
     "@types/react": "^18.0.15",
+    "@types/styled-components": "^5.1.25",
+    "eslint": "^8.19.0",
+    "eslint-config-next": "12.2.0",
+    "gh-pages": "^4.0.0",
     "typescript": "^4.7.4"
   }
 }
