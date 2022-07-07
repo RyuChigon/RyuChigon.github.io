@@ -18,6 +18,7 @@ export default Header;
 
 const Container = styled.div`
   height: calc(var(--header-height) + var(--header-margin));
+  padding: var(--header-padding);
   background: #ffffff;
   display: flex;
   align-items: center;

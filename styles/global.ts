@@ -35,11 +35,15 @@ export const GlobalStyle = createGlobalStyle`
   }
   :root {
     --header-height: 27px;
-    --header-border: 5px;
-    --header-margin: 23px;
-    --header-size: calc(var(--header-height) + var(--header-margin) + var(--header-border));
+    --header-margin: 20px;
+    --header-padding: 23px;
+    --header-size: calc(var(--header-height) + var(--header-margin) + 2 * var(--header-padding));
     --main-margin-top: 33px;
     --main-margin-bottom: 32px;
+    --footer-height: 20px;
+    --footer-margin: 15px;
+    --footer-padding: 15px;
+    --footer-size: calc(var(--footer-height) + var(--footer-margin) + 2 * var(--footer-padding));
   }
 
   @media screen and (max-width:640px) {
