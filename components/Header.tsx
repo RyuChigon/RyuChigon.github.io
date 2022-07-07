@@ -1,13 +1,18 @@
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const Header = (props) => {
   return (
     <Container>
       <Content>
-        <Title>RyuChigon&apos;s Blog</Title>
+        <Link href="/" passHref>
+          <Title>RyuChigon&apos;s Blog</Title>
+        </Link>
         <Menus>
-          <Menu>Blog</Menu>
-          <Menu>About</Menu>
+          <Link href="/blog" passHref>
+            <Menu>Blog</Menu>
+          </Link>
+          {/* <Menu>About</Menu> */}
         </Menus>
       </Content>
     </Container>
@@ -36,6 +41,8 @@ const Title = styled.a`
   font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
+  text-decoration: none;
+  color: #000000;
 `;
 
 const Menus = styled.div`
@@ -47,4 +54,6 @@ const Menu = styled.a`
   font-weight: 500;
   margin-left: 30px;
   cursor: pointer;
+  text-decoration: none;
+  color: #000000;
 `
