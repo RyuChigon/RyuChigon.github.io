@@ -6,6 +6,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { pageview } from "@/lib/ga";
+import '@/public/static/fonts/style.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
