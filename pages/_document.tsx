@@ -46,6 +46,14 @@ class MyDocument extends Document {
             rel="stylesheet"
             type="text/css"
           />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Fira+Code&display=optional"
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Open+Sans&display=optional"
+          />
         </Head>
         <body>
           <Main />
