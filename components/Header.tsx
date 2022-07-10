@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from '@/components/Image';
 import { ThemeMode } from '@/styles/theme';
 import lightMode from '@/public/static/lightMode.png';
 import darkMode from '@/public/static/darkMode.png';
