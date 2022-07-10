@@ -2,10 +2,11 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import PostBlock from '@/components/PostBlock'
+import styled from 'styled-components'
 
 const Blog = ({ posts }) => {
   return (
-    <div className="mt-5">
+    <Container>
       {posts && posts.map((post, index) => (
         <PostBlock
           title={post.frontMatter.title}
@@ -15,7 +16,7 @@ const Blog = ({ posts }) => {
           key={index}
         />
       ))}
-    </div>
+    </Container>
   )
 }
 
@@ -40,3 +41,9 @@ export const getStaticProps = async () => {
 }
 
 export default Blog;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

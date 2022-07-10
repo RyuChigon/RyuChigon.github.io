@@ -10,8 +10,8 @@ const size = {
 const maxWidth = {
   mobile: '640px',
   tablet: '760px',
-  laptop: '960px',
-  laptopL: '1300px',
+  laptop: '800px',
+  laptopL: '800px',
 };
 
 const device = {
@@ -49,7 +49,7 @@ export const GlobalStyle = createGlobalStyle`
   @media screen and (max-width:640px) {
     :root {
       --screen-max-width: 90%;
-      min-width: 500px;
+      min-width: 300px;
     }
   }
 
