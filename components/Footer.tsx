@@ -15,11 +15,10 @@ export default Footer;
 const Container = styled.div`
   height: calc(var(--footer-height) + var(--footer-margin));
   padding: var(--footer-padding);
-  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid rgb(216, 216, 216);
+  border-top: 1px solid ${props => props.theme.border};
 `;
 
 const Content = styled.div`

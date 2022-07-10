@@ -1,20 +1,32 @@
+import { ThemeMode } from '@/styles/theme';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 import Footer from './Footer';
 import Header from './Header';
 
-const Container = (props) => {
+interface ContainerProps {
+  theme: ThemeMode;
+  toggleTheme: () => void;
+  children: ReactNode
+}
+
+const Container = (props: ContainerProps) => {
   return (
-    <>
-      <Header />
+    <Layout>
+      <Header {...props}/>
       <MainContainer>
         <main>{props.children}</main>
       </MainContainer>
       <Footer />
-    </>
+    </Layout>
   )
 }
 
 export default Container;
+
+const Layout = styled.div`
+  background-color: ${props => props.theme.background};
+`
 
 
 const MainContainer = styled.div`

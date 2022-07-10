@@ -17,17 +17,16 @@ export default PostBlock;
 
 const Container = styled.div`
   width: calc(80% - 60px);
-  background: #fcfcff;
+  background: ${props => props.theme.postBox};
   border: 1px solid #d9dcff;
   border-radius: 10px;
-  /* box-shadow: 0px 0px 5px 3px #d4daff; */
   padding: 10px 30px;
   margin: 10px;
   cursor: pointer;
   transition: 0.2s;
 
   &:hover {
-    box-shadow: 0px 0px 5px 1px #d4daff;
+    box-shadow: 0px 0px 5px 1px ${props => props.theme.postBoxBorder};
   }
 `;
 
@@ -35,6 +34,7 @@ const Title = styled.p`
   font-size: 2rem;
   font-weight: 700;
   margin: 1rem 0;
+  color: #000000;
 `;
 
 const Des = styled.p`

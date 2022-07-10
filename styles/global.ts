@@ -1,4 +1,4 @@
-import { createGlobalStyle, DefaultTheme } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 const size = {
   mobile: '640px',
@@ -21,17 +21,13 @@ const device = {
   laptopL: `(min-width: ${size.laptopL})`,
 };
 
-export const theme: DefaultTheme = {
-  colors: {
-    primary: '#123456'
-  }
-};
-
 export const GlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
-    font-family: "NanumSquare", "Open Sans", "sans-serif"
+    font-family: "NanumSquare", "Open Sans", "sans-serif";
+    background-color: ${props => props.theme.background};
+    color: ${props => props.theme.color};
   }
   :root {
     --header-height: 27px;

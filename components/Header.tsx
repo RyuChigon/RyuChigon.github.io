@@ -1,7 +1,16 @@
 import styled from 'styled-components';
 import Link from 'next/link';
+import Image from 'next/image';
+import { ThemeMode } from '@/styles/theme';
+import lightMode from '@/public/static/lightMode.png';
+import darkMode from '@/public/static/darkMode.png';
 
-const Header = (props) => {
+interface HeaderProps {
+  theme: ThemeMode;
+  toggleTheme: () => void;
+}
+
+const Header = ({ theme, toggleTheme }: HeaderProps) => {
   return (
     <Container>
       <Content>
@@ -9,6 +18,14 @@ const Header = (props) => {
           <Title>RyuChigon&apos;s Blog</Title>
         </Link>
         <Menus>
+          <Image
+            src={theme === ThemeMode.LIGHT ? darkMode : lightMode}
+            alt="toggleMode"
+            width={25}
+            height={25}
+            onClick={toggleTheme}
+            style={{ cursor: 'pointer' }}
+          />
           <Link href="/blog" passHref>
             <Menu>Blog</Menu>
           </Link>
@@ -24,7 +41,6 @@ export default Header;
 const Container = styled.div`
   height: calc(var(--header-height) + var(--header-margin));
   padding: var(--header-padding);
-  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,14 +54,15 @@ const Content = styled.div`
 `;
 
 const Title = styled.a`
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  color: #000000;
+  color: ${props => props.theme.color};
 `;
 
 const Menus = styled.div`
+  display: flex;
   align-items: center;
 `;
 
@@ -55,5 +72,5 @@ const Menu = styled.a`
   margin-left: 30px;
   cursor: pointer;
   text-decoration: none;
-  color: #000000;
+  color: ${props => props.theme.color}
 `
