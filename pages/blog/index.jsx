@@ -7,7 +7,9 @@ import styled from 'styled-components'
 const Blog = ({ posts }) => {
   return (
     <Container>
-      {posts && posts.map((post, index) => (
+      {posts && posts.sort((a, b) => {
+        return Date.parse(b.frontMatter.date) - Date.parse(a.frontMatter.date);
+      }).map((post, index) => (
         <PostBlock
           title={post.frontMatter.title}
           des={post.frontMatter.description}
