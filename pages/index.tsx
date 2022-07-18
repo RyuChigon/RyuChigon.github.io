@@ -9,6 +9,7 @@ function Home() {
   return (
     <Container>
       <Image
+        priority
         src={profileImage}
         alt="profile"
         width={150}
