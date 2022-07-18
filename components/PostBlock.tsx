@@ -6,8 +6,10 @@ const PostBlock = ({ title, des, date, slug }) => {
     <Link href={'/blog/' + slug} passHref>
       <Container>
         <Title>{title}</Title>
-        <Des>{des}</Des>
-        <Date>{date}</Date>
+        <SubContent>
+          <Des>{des}</Des>
+          <Date>{date}</Date>
+        </SubContent>
       </Container>
     </Link>
   )
@@ -30,15 +32,21 @@ const Container = styled.div`
   }
 `;
 
+const SubContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 const Title = styled.p`
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 700;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   color: #000000;
 `;
 
 const Des = styled.p`
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #484848;
 `;
 
