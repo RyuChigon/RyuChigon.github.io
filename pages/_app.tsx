@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { GlobalStyle } from "@/styles/global";
 import { light, dark } from "@/styles/theme";
 import { ThemeMode } from "@/styles/theme";
-import Container from "@/components/Container";
+import Container from "@/src/components/Container";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";

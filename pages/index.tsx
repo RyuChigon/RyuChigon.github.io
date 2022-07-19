@@ -1,5 +1,5 @@
 import profileImage from '@/public/static/profile.png';
-import Image from '@/components/Image';
+import Image from '@/src/components/Image';
 import styled from 'styled-components';
 import { useTranslation } from 'next-export-i18n';
 
