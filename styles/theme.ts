@@ -7,6 +7,7 @@ declare module "styled-components" {
     border: string;
     postBox: string;
     postBoxBorder: string;
+    codeBackground: string;
   }
 }
 
@@ -21,6 +22,7 @@ export const light = {
   border: "#d8d8d8",
   postBox: "#fcfcff",
   postBoxBorder: "#d4daff",
+  codeBackground: "#eeeeee",
 };
 
 export const dark = {
@@ -29,4 +31,5 @@ export const dark = {
   border: "#777777",
   postBox: "#fcfcff",
   postBoxBorder: "#555555",
+  codeBackground: "#aaaacc",
 }

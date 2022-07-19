@@ -87,7 +87,7 @@ export const GlobalStyle = createGlobalStyle`
     Modified by RyuChigon (2022)
   */
   pre {
-    background: #eeeeee;
+    background: ${props => props.theme.codeBackground};
     padding: 20px;
     border-radius: 8px;
   }
