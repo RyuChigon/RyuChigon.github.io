@@ -213,3 +213,126 @@ JobHandle jh = JobHandle.CombineDependencies(handles);
 ```
 
 
+
+### An example of multiple jobs and dependencies
+
+```csharp
+using UnityEngine;
+using Unity.Collections;
+using Unity.Jobs;
+
+public class MyDependentJob: MonoBehaviour
+{
+    NativeArray<float> result;
+    JobHandle secondHandle;
+    
+    // Set up the first job
+    public struct MyJob : IJob
+    {
+        public float a;
+        public float b;
+        public NativeArray<float> result;
+
+        public void Execute()
+        {
+            result[0] = a + b;
+        }
+    }
+
+    // Set up the second job, which adds one to a value
+    public struct AddOneJob : IJob
+    {
+        public NativeArray<float> result;
+
+        public void Execute()
+        {
+            result[0] = result[0] + 1;
+        }
+    }
+    
+    void Update()
+    {
+        result = new NativeArray<float>(1, Allocator.TempJob);
+        
+        MyJob jobData = new MyJob
+        {
+            a = 10,
+            b = 10,
+            result = result
+        };
+        
+        JobHandle firstHandle = jobdata.Schedule();
+        
+        AddOneJob incJobData = new AddOneJob
+        {
+            result = result;
+        };
+        
+        secondHandle = incJobData.Schedule(firstHandle);
+    }
+    
+    void LateUpdate()
+    {
+        // Sometime later in the frame, wait for the job to complete before accessing the results.
+        secondHandle.Complete();
+		
+        float aPlusBPlusOne = result[0];
+        
+        result.Dispose();
+    }
+}
+```
+
+
+
+
+
+# Parallel jobs
+
+ParallelFor job은 여러 개의 코어에서 동작한다. 코어당 하나의 잡이 있으며, 각각 일정량의 작업을 처리한다. IJobParallelFor는 IJob과 비슷하게 동작하지만, 단일 Execute가 아니라 데이터 소스의 항목당 하나의 Execute 메서드를 호출한다. Execute 메서드에는 정수 파라미터가 있는데, 이 인덱스는 잡 구현 내에서 데이터 소스의 단일 요소에 액세스하여 동작한다.
+
+
+
+### ParallelFor 잡 예약
+
+ParallelFor 잡을 예약할 때는 분할할 NativeArray 데이터 소스의 길이를 지정해야 한다. ParallelFor 잡을 예약할 때 C# 작업 시스템은 작업을 배치로 나누어 코어 간에 배포한다. 각 배치에는 Execute 메서드의 하위 집합이 포함된다. 그러면 C# 잡 시스템은 Unity의 네이티브 잡 시스템에서 CPU 코어당 하나의 잡을 예약한 후 해당 네이티브 잡에 완료할 일부 배치를 전달한다.
+
+한 네이티브 잡이 다른 네이티브 잡보다 배치를 먼저 완료하면 다른 네이티브 잡의 남은 배치를 가져온다. 한 번에 네이티브 잡의 남은 배치의 절반만 가져오므로 캐시 집약성이 보장된다.
+
+**프로세스를 최적화하려면 배치 수를 지정해야 한다.** 배치 수는 몇 개의 잡을 가져오고 스레드 간에 작업 재배포를 어떻게 세부 조정할지를 제어한다. 작은 배치 수를 지정하면 스레드 간에 작업을 더 균등하게 배포할 수 있다. 성능 소모가 더 발생하더라도 때로는 배치 수를 늘려야 할 때도 있다. 1부터 시작하여 성능 향상을 무시할 수 있는 수준까지 개수를 늘리는 것도 좋은 전략이다.
+
+```csharp
+public struct MyParallelJob : IJobParallelFor
+{
+    [ReadOnly] public NativeArray<float> a;
+    [ReadOnly] public NativeArray<float> b;
+    public NativeArray<float> result;
+    
+    public void Execute(int i)
+    {
+        result[i] = a[i] + b[i];
+    }
+}
+
+NativeArray<float> a = new(2, Allocator.TempJob);
+NativeArray<float> b = new(2, Allocator.TempJob);
+NativeArray<float> result = new(2, Allocator.TempJob);
+
+a[0] = 1.1;
+a[1] = 3.3;
+b[0] = 2.2;
+b[1] = 4.4;
+
+MyParallelJob jobData = new();
+jobData.a = a;
+jobData.b = b;
+jobData.result = result;
+
+// Schedule the job with one Execute per index in the results array and only 1 item per processing batch
+JobHandle handle = jobData.Schedule(result.Length, 1);
+handle.Complete();
+
+a.Dispose();
+b.Dispose();
+result.Dispose();
+```
