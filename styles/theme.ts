@@ -26,10 +26,10 @@ export const light = {
 };
 
 export const dark = {
-  background: "#080808",
+  background: "#202224",
   color: "#dddddd",
   border: "#777777",
-  postBox: "#fcfcff",
+  postBox: "#3089c3",
   postBoxBorder: "#555555",
   codeBackground: "#aaaacc",
 }

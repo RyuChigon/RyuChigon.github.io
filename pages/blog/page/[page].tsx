@@ -43,6 +43,7 @@ export const getStaticProps = ({ params }) => {
   const pageNumber = Math.ceil(posts.length / POSTS_PER_PAGE);
   const startIndex = page - 1;
   const orderedPosts = posts.slice(startIndex * POSTS_PER_PAGE, (startIndex + 1) * POSTS_PER_PAGE);
+  console.log(posts);
   return {
     props:{
       posts : orderedPosts,
